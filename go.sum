@@ -1,0 +1,11 @@
+github.com/Rhymond/go-money v1.0.10 h1:jaySwEIcS6cQELv1XiJSGqcicI93ln9RhHHa14zWpZc=
+github.com/Rhymond/go-money v1.0.10/go.mod h1:iHvCuIvitxu2JIlAlhF0g9jHqjRSr+rpdOs7Omqlupg=
+github.com/bojanz/currency v1.2.1 h1:l953UDr2iFvvVzPinHQ96+ufElo8LEUt7piAZ9eBtmc=
+github.com/bojanz/currency v1.2.1/go.mod h1:jNoZiJyRTqoU5DFoa+n+9lputxPUDa8Fz8BdDrW06Go=
+github.com/cockroachdb/apd/v3 v3.2.1 h1:U+8j7t0axsIgvQUqthuNm82HIrYXodOV2iWLWtEaIwg=
+github.com/cockroachdb/apd/v3 v3.2.1/go.mod h1:klXJcjp+FffLTHlhIG69tezTDvdP065naDsHzKhYSqc=
+github.com/govalues/decimal v0.1.19 h1:cqFTYCcEmnJ8h0flsiLTJGFHp4GLNqf71a9tfSAZPOg=
+github.com/govalues/decimal v0.1.19/go.mod h1:irMp3+UfATz5dlLhUagswX2ATLhGDmo/Hoq2MP4/9gg=
+github.com/govalues/money v0.2.2 h1:Tc+nNmpDi+/tINs+4/OEhDfUXQWmoVQwViue4T5fZ+s=
+github.com/govalues/money v0.2.2/go.mod h1:77LSUZ3xJ0dyU1UIcAh8SzLOXbOYcFHBgO+8T4nHN1k=
+github.com/lib/pq v1.10.7 h1:p7ZhMD+KsSRozJr34udlUrhboJwWAgCg34+/ZZNvZZw=
