@@ -14,37 +14,37 @@ import (
 )
 
 var (
-	resultErr      error
-	resultString   string
-	resultRhymond  *rh.Money
-	resultGovalues gm.Amount
-	resultBojanz   bo.Amount
+	resultError  error
+	resultString string
+	resultRH     *rh.Money
+	resultGV     gm.Amount
+	resultBO     bo.Amount
 )
 
 func BenchmarkAmount_Add(b *testing.B) {
 	b.Run("mod=govalues", func(b *testing.B) {
 		for i := 0; i < b.N; i++ {
-			d, _ := gd.New(200, 2)
-			e, _ := gd.New(300, 2)
+			d, _ := gd.New(500, 2)
+			e, _ := gd.New(600, 2)
 			a, _ := gm.NewAmountFromDecimal(gm.USD, d)
 			c, _ := gm.NewAmountFromDecimal(gm.USD, e)
-			resultGovalues, resultErr = a.Add(c)
+			resultGV, resultError = a.Add(c)
 		}
 	})
 
 	b.Run("mod=rhymond", func(b *testing.B) {
 		for i := 0; i < b.N; i++ {
-			a := rh.New(200, rh.USD)
-			c := rh.New(300, rh.USD)
-			resultRhymond, resultErr = a.Add(c)
+			a := rh.New(500, rh.USD)
+			c := rh.New(600, rh.USD)
+			resultRH, resultError = a.Add(c)
 		}
 	})
 
 	b.Run("mod=bojanz", func(b *testing.B) {
 		for i := 0; i < b.N; i++ {
-			a, _ := bo.NewAmountFromInt64(200, "USD")
-			c, _ := bo.NewAmountFromInt64(300, "USD")
-			resultBojanz, resultErr = a.Add(c)
+			a, _ := bo.NewAmountFromInt64(500, "USD")
+			c, _ := bo.NewAmountFromInt64(600, "USD")
+			resultBO, resultError = a.Add(c)
 		}
 	})
 }
@@ -55,32 +55,32 @@ func BenchmarkAmount_Mul(b *testing.B) {
 			d, _ := gd.New(200, 2)
 			e, _ := gd.New(3, 0)
 			a, _ := gm.NewAmountFromDecimal(gm.USD, d)
-			resultGovalues, resultErr = a.Mul(e)
+			resultGV, resultError = a.Mul(e)
 		}
 	})
 
 	b.Run("mod=rhymond", func(b *testing.B) {
 		for i := 0; i < b.N; i++ {
 			a := rh.New(200, rh.USD)
-			resultRhymond = a.Multiply(3)
+			resultRH = a.Multiply(3)
 		}
 	})
 
 	b.Run("mod=bojanz", func(b *testing.B) {
 		for i := 0; i < b.N; i++ {
 			a, _ := bo.NewAmountFromInt64(200, "USD")
-			resultBojanz, resultErr = a.Mul("3")
+			resultBO, resultError = a.Mul("3")
 		}
 	})
 }
 
-func BenchmarkAmount_QuoFinite(b *testing.B) {
+func BenchmarkAmount_QuoExact(b *testing.B) {
 	b.Run("mod=govalues", func(b *testing.B) {
 		for i := 0; i < b.N; i++ {
 			d, _ := gd.New(200, 2)
 			e, _ := gd.New(4, 0)
 			a, _ := gm.NewAmountFromDecimal(gm.USD, d)
-			resultGovalues, resultErr = a.Quo(e)
+			resultGV, resultError = a.Quo(e)
 		}
 	})
 
@@ -91,7 +91,7 @@ func BenchmarkAmount_QuoFinite(b *testing.B) {
 	b.Run("mod=bojanz", func(b *testing.B) {
 		for i := 0; i < b.N; i++ {
 			a, _ := bo.NewAmountFromInt64(200, "USD")
-			resultBojanz, resultErr = a.Div("4")
+			resultBO, resultError = a.Div("4")
 		}
 	})
 }
@@ -102,7 +102,7 @@ func BenchmarkAmount_QuoInfinite(b *testing.B) {
 			d, _ := gd.New(200, 2)
 			e, _ := gd.New(3, 0)
 			a, _ := gm.NewAmountFromDecimal(gm.USD, d)
-			resultGovalues, resultErr = a.Quo(e)
+			resultGV, resultError = a.Quo(e)
 		}
 	})
 
@@ -113,7 +113,7 @@ func BenchmarkAmount_QuoInfinite(b *testing.B) {
 	b.Run("mod=bojanz", func(b *testing.B) {
 		for i := 0; i < b.N; i++ {
 			a, _ := bo.NewAmountFromInt64(200, "USD")
-			resultBojanz, resultErr = a.Div("3")
+			resultBO, resultError = a.Div("3")
 		}
 	})
 }
@@ -123,14 +123,14 @@ func BenchmarkAmount_Split(b *testing.B) {
 		for i := 0; i < b.N; i++ {
 			d, _ := gd.New(200, 2)
 			a, _ := gm.NewAmountFromDecimal(gm.USD, d)
-			_, resultErr = a.Split(10)
+			_, resultError = a.Split(10)
 		}
 	})
 
 	b.Run("mod=rhymond", func(b *testing.B) {
 		for i := 0; i < b.N; i++ {
 			a := rh.New(200, rh.USD)
-			_, resultErr = a.Split(10)
+			_, resultError = a.Split(10)
 		}
 	})
 
@@ -146,7 +146,7 @@ func BenchmarkAmount_Conv(b *testing.B) {
 			e, _ := gd.New(8000, 4)
 			a, _ := gm.NewAmountFromDecimal(gm.USD, d)
 			r, _ := gm.NewExchRateFromDecimal(gm.USD, gm.EUR, e)
-			resultGovalues, resultErr = r.Conv(a)
+			resultGV, resultError = r.Conv(a)
 		}
 	})
 
@@ -157,7 +157,7 @@ func BenchmarkAmount_Conv(b *testing.B) {
 	b.Run("mod=bojanz", func(b *testing.B) {
 		for i := 0; i < b.N; i++ {
 			a, _ := bo.NewAmountFromInt64(200, "USD")
-			resultBojanz, resultErr = a.Convert("EUR", "0.8000")
+			resultBO, resultError = a.Convert("EUR", "0.8000")
 		}
 	})
 }
@@ -173,20 +173,20 @@ func BenchmarkParseAmount(b *testing.B) {
 		b.Run(s, func(b *testing.B) {
 			b.Run("mod=govalues", func(b *testing.B) {
 				for i := 0; i < b.N; i++ {
-					resultGovalues, resultErr = gm.ParseAmount("USD", s)
+					resultGV, resultError = gm.ParseAmount("USD", s)
 				}
 			})
 
 			b.Run("mod=rhymond", func(b *testing.B) {
 				for i := 0; i < b.N; i++ {
 					f, _ := strconv.ParseFloat(s, 64)
-					resultRhymond = rh.NewFromFloat(f, "USD")
+					resultRH = rh.NewFromFloat(f, "USD")
 				}
 			})
 
 			b.Run("mod=bojanz", func(b *testing.B) {
 				for i := 0; i < b.N; i++ {
-					resultBojanz, resultErr = bo.NewAmount(s, "USD")
+					resultBO, resultError = bo.NewAmount(s, "USD")
 				}
 			})
 		})
