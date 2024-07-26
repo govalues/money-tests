@@ -1,5 +1,13 @@
 version: "3"
 tasks:
+  test:
+    cmds:
+      - task: fuzz
+      - task: sql
+
+  fuzz:
+    desc: Run fuzz tests
+
   sql:
     desc: Run SQL tests
     dir: sql

@@ -20,7 +20,10 @@ jobs:
       run: gofmt -s -w . && git diff --exit-code
 
     - name: Verify dependency consistency
-      run: go get -u -t . && go mod tidy && git diff --exit-code
+      run: go get -u -t ./... && go mod tidy && git diff --exit-code
 
     - name: Verify potential issues
       uses: golangci/golangci-lint-action@v3
+
+    - name: Run fuzz tests
+      run: task fuzz
